@@ -69,7 +69,7 @@ function getTweet(tweet) {
 
  ******************* */
 
-const stream = T.stream('statuses/filter', { track: ['Purdue sucks'] });
+const stream = T.stream('statuses/filter', { track: ['Purdue sucks', '4E42F7DD43EC'] });
 
 stream.on('tweet', (tweet) => {
 
