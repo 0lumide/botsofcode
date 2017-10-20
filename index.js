@@ -30,13 +30,13 @@ const Twitter = require('./modules/twitter');
 
  ******************* */
 const me = {
-    id: 2714960622,
-    screen_name: 'ireaderinokun'
+    id: 1532703702,
+    screen_name: 'MLadapo'
 };
 
 const botsofcode = {
-    id: 743145993844179000,
-    screen_name: 'botsofcode'
+    id: 921509836826791936,
+    screen_name: 'PurdueSucks_'
 };
 
 const emojis = ['👊', '👊', '🙌', '👍', '💁', '👌', '🙅', '👯'];
@@ -48,8 +48,6 @@ const emojis = ['👊', '👊', '🙌', '👍', '💁', '👌', '🙅', '👯'];
 
  ******************* */
 function shouldSendReply() {
-    const randomNumber = Math.random();
-    if (randomNumber > 0.3) return true;
     return false;
 }
 
@@ -71,7 +69,7 @@ function getTweet(tweet) {
 
  ******************* */
 
-const stream = T.stream('statuses/filter', { track: ['bitsofco.de', 'bitsofcode'] });
+const stream = T.stream('statuses/filter', { track: ['Purdue sucks'] });
 
 stream.on('tweet', (tweet) => {
 
@@ -79,24 +77,15 @@ stream.on('tweet', (tweet) => {
 		return;
 	}
 
-    Twitter.like(tweet);
+	if ( tweet.retweeted_status ) return;
 
-	if ( tweet.user.id === me.id ) {
-        Twitter.retweet(tweet);
-		return;
+	Twitter.like(tweet);
+
+	Twitter.retweet(tweet);
+
+	if ( shouldSendReply() ) {
+		Twitter.reply(tweet, getTweet(tweet));
 	}
-
-    if ( tweet.retweeted_status ) return;
-
-	if ( tweet.text.toLowerCase().includes('@ireaderinokun') ) {
-		if ( shouldSendReply() ) {
-            Twitter.reply(tweet, getTweet(tweet));
-		}
-		return;
-	}
-
-    Twitter.reply(tweet, getTweet(tweet));
-
 });
 
 
