@@ -2,9 +2,9 @@
   "name": "botsofcode",
   "version": "1.0.1",
   "description": "A bot for bitsofco.de",
-  "main": "index.js",
+  "main": "botsofcode.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node botsofcode.js"
   },
   "author": "ire-aderinokun",
   "dependencies": {
